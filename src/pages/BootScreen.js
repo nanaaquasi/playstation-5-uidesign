@@ -1,26 +1,72 @@
 import { Box, Flex, Icon, Image, Stack, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import bootBgVideo from "../assets/videos/boot.mp4";
 import logoImg from "../assets/images/logo-black.png";
+import powerIcon from "../assets/icons/power.png";
 import loader from "../assets/sounds/loader.mp3";
 import silence from "../assets/sounds/silence.mp3";
 
 import { useAudio } from "../utils";
 import { userAccounts } from "../mock";
+import { UserAccountCard } from "../components/Cards";
 
 const BootScreen = () => {
-  // const [audio] = useState(new Audio(loader));
-  // const [playing, setPlaying] = useState(false);
+  const audioRef = useRef(null);
 
-  // React.useEffect(() => {
-  //   audio.play();
-  // }, []);
+  useEffect(() => {
+    audioRef.current.currentTime = 0.5;
+  }, []);
 
-  const videoStyles = {
-    position: "fixed",
-    zIndex: -2,
-    width: "100%",
-  };
+  // console.log(audioRef.current);
+
+  const preWelcomeScreen = (
+    <>
+      <iframe
+        src={silence}
+        allow='autoplay'
+        id='audio'
+        style={{ display: "none" }}
+      ></iframe>
+      <audio
+        autoPlay={true}
+        loop={true}
+        style={{ display: "none" }}
+        ref={audioRef}
+      >
+        <source src={loader} type='audio/mp3'></source>
+      </audio>
+      <Flex direction='column' align='center' justify='center'>
+        <Text color='#eee' fontSize='18px' mb='20'>
+          Press the PS Button(Enter) on your controller
+        </Text>
+        <Box
+          width='90px'
+          h='90px'
+          border='1px solid #eee'
+          rounded='full'
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+          mb='40'
+          mt='20'
+        >
+          <Box
+            d='flex'
+            alignItems='center'
+            justifyContent='center'
+            bg='#ccc'
+            w='60px'
+            height='60px'
+            rounded='full'
+            cursor='pointer'
+            onClick={() => setScreenDisplay(welcomeScreen)}
+          >
+            <Image src={logoImg} alt='Logo' />
+          </Box>
+        </Box>
+      </Flex>
+    </>
+  );
 
   const welcomeScreen = (
     <>
@@ -35,7 +81,7 @@ const BootScreen = () => {
       </audio>
       <Flex
         direction='column'
-        w='1100px'
+        w='1200px'
         h='100%'
         align='space-between'
         px='10'
@@ -60,7 +106,7 @@ const BootScreen = () => {
             <Text color='white' fontSize='4xl' fontWeight='300'>
               Welcome Back to Playstation.
             </Text>
-            <Text textAlign='center' color='#eee'>
+            <Text textAlign='center' color='#eee' fontSize='20px'>
               Who's using this controller?
             </Text>
           </Box>
@@ -71,7 +117,7 @@ const BootScreen = () => {
                 w='120px'
                 h='120px'
                 rounded='full'
-                bg='#eee'
+                bg='rgba(116, 116, 116, 0.171)'
                 d='flex'
                 alignItems='center'
                 justifyContent='center'
@@ -79,38 +125,39 @@ const BootScreen = () => {
                 mb='10'
                 cursor='pointer'
               >
-                <Text fontWeight='800' fontSize='6xl'>
+                <Text fontWeight='800' fontSize='6xl' color='#eee'>
                   +
                 </Text>
               </Box>
-              <Text mt='20' color='#ccc' fontWeight='800'>
+              <Text mt='20' color='#ccc' fontWeight='800' fontWeight='400'>
                 Add User
               </Text>
             </Stack>
 
             {userAccounts.map((user) => (
-              <Stack>
-                <Box key={user.id} mb='10' cursor='pointer'>
-                  <Image
-                    src={user.image}
-                    objectFit='cover'
-                    rounded='full'
-                    w='120px'
-                    h='120px'
-                    transform={user.defaultUser && "scale(1.5)"}
-                    border={user.defaultUser && "2px solid #ccc"}
-                  />
-                </Box>
-                <Text mt='20' color='#ccc' fontWeight='800' textAlign='center'>
-                  {user.name}
-                </Text>
-              </Stack>
+              <UserAccountCard user={user} key={user.id} />
             ))}
           </Stack>
         </Stack>
         <Flex justify='space-between'>
           <Box></Box>
-          <Box w='40px' h='40px' rounded='full' bg='#eee'></Box>
+          <Box
+            w='40px'
+            h='40px'
+            rounded='full'
+            bg='rgba(116, 116, 116, 0.171)'
+            backgroundBlendMode='multiply'
+            d='flex'
+            justifyContent='center'
+            alignItems='center'
+          >
+            <Image
+              src={powerIcon}
+              objectPosition='center'
+              alignSelf='center'
+              w='20px'
+            />
+          </Box>
           <Stack isInline align='center'>
             <Box
               w='30px'
@@ -134,36 +181,13 @@ const BootScreen = () => {
     </>
   );
 
-  const preWelcomeScreen = (
-    <Flex direction='column' align='center' justify='center'>
-      <Text color='#eee' fontSize='18px' mb='20'>
-        Press the PS Button(Enter) on your controller
-      </Text>
-      <Box
-        width='90px'
-        h='90px'
-        border='1px solid #eee'
-        rounded='full'
-        display='flex'
-        alignItems='center'
-        justifyContent='center'
-        mb='40'
-        mt='20'
-      >
-        <Box
-          d='flex'
-          alignItems='center'
-          justifyContent='center'
-          bg='#ccc'
-          w='60px'
-          height='60px'
-          rounded='full'
-        >
-          <Image src={logoImg} alt='Logo' />
-        </Box>
-      </Box>
-    </Flex>
-  );
+  const [screenToDisplay, setScreenDisplay] = React.useState(preWelcomeScreen);
+
+  const videoStyles = {
+    position: "fixed",
+    zIndex: -2,
+    width: "100%",
+  };
 
   return (
     <Box d='flex' alignItems='center' justifyContent='center' h='100vh'>
@@ -178,7 +202,7 @@ const BootScreen = () => {
         position='absolute'
         zIndex='-1'
       ></Box>
-      {welcomeScreen}
+      {screenToDisplay}
     </Box>
   );
 };

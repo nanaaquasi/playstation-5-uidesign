@@ -1,0 +1,49 @@
+.Home {
+  width: 100%;
+  height: 100vh;
+  padding: 20px 60px;
+  /* background-image: url("../assets//images/astro/astro-bg-duo.png"); */
+  /* background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; */
+}
+
+.Image {
+  position: relative;
+}
+
+.Image::before {
+  content: "";
+  position: absolute;
+
+  right: -3px;
+  bottom: -3px;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(44, 255, 97);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.Dragger {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  transition: all 0.2s;
+  transform: scale(0.98);
+  will-change: transform;
+}
+
+.Dragger::-webkit-scrollbar {
+  display: none;
+}
+.Active::-webkit-scrollbar {
+  display: none;
+}
+
+.Active {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  transform: scale(1);
+}
