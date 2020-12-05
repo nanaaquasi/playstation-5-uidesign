@@ -1,17 +1,20 @@
+import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { Route, Switch, useLocation, useRouteMatch } from "react-router-dom";
 import { ExploreContent } from "../components/ExploreContent";
 import GameDetailContent from "../pages/GameDetailContent";
 
 const HomeContentNavigator = () => {
-  const { url } = useRouteMatch();
+  const { path } = useRouteMatch();
   const location = useLocation();
   return (
     <>
-      <Route path={url} component={ExploreContent} exact />
-      <Switch location={location}>
-        <Route path={`${url}/game/:id`} component={GameDetailContent} exact />
-      </Switch>
+      <AnimatePresence initial={false} exitBeforeEnter>
+        <Switch location={location} key={location.pathname}>
+          <Route path={`${path}/:id`} component={GameDetailContent} />
+          <Route path={path} component={ExploreContent} exact />
+        </Switch>
+      </AnimatePresence>
     </>
   );
 };

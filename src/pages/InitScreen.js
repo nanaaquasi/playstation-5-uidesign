@@ -10,8 +10,7 @@ export const InitScreen = () => {
 
   const showBootUpScreen = (e) => {
     e.preventDefault();
-    console.log("Boot screen");
-    history.push("/welcome");
+    e.key === "Enter" && history.push("/welcome");
   };
 
   React.useEffect(() => {

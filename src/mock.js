@@ -4,27 +4,33 @@ import user2 from "./assets/images/user-2.jpg";
 import gtaPreview from "./assets/images/gta/preview.jpg";
 import gtaLarge from "./assets/images/gta/preview-large.jpeg";
 import gtaLogo from "./assets/images/gta/logo.png";
+import gtaVideo from "./assets/videos/gta.webm";
 
 import spidermanPreview from "./assets/images/spiderman/preview.jpg";
 import spidermanLarge from "./assets/images/spiderman/preview-lg.jpeg";
 import spidermanLogo from "./assets/images/spiderman/logo.png";
+import spidermanVideo from "./assets/videos/spiderman.mp4";
 
 import astroLarge from "./assets/images/astro/preview-large.png";
 import astroLogo from "./assets/images/astro/logo.png";
+import astroVideo from "./assets/videos/astro.mp4";
 
 import rachetPreview from "./assets/images/rachet/preview.png";
 import rachetLarge from "./assets/images/rachet/preview-lg.png";
 import rachetLogo from "./assets/images/rachet/logo.png";
+import rachetVideo from "./assets/videos/rachet.mp4";
 
 import horizonLarge from "./assets/images/horizon/preview-lg.jpeg";
 
 import codPreview from "./assets/images/cod/preview.jpeg";
 import codLarge from "./assets/images/cod/preview-lg.png";
 import codLogo from "./assets/images/cod/logo.png";
+import codVideo from "./assets/videos/cod.webm";
 
 import mambaPreview from "./assets/images/nba/preview.jpg";
 import mambaLarge from "./assets/images/nba/mamba.jpeg";
 import nbaLogo from "./assets/images/nba/logo.png";
+import mambaVideo from "./assets/videos/mamba.webm";
 
 export const userAccounts = [
   {
@@ -51,6 +57,10 @@ export const userGames = [
     logo: astroLogo,
     tagline:
       "Discover the future of play with intergalactic platforming hero  - ASTRO",
+    video: {
+      videoSrc: astroVideo,
+      type: "video/mp4",
+    },
   },
   {
     id: "2",
@@ -59,6 +69,10 @@ export const userGames = [
     mainImg: spidermanLarge,
     logo: spidermanLogo,
     tagline: "Be Greater. Be Yourself.",
+    video: {
+      type: "video/mp4",
+      videoSrc: spidermanVideo,
+    },
   },
   {
     id: "3",
@@ -67,6 +81,11 @@ export const userGames = [
     mainImg: gtaLarge,
     logo: gtaLogo,
     tagline: "Welcome to Los Santos.",
+
+    video: {
+      videoSrc: gtaVideo,
+      type: "video/webm",
+    },
   },
   {
     id: "4",
@@ -75,6 +94,11 @@ export const userGames = [
     mainImg: rachetLarge,
     logo: rachetLogo,
     tagline: "Blast your way through an interdimensional adventure",
+
+    video: {
+      videoSrc: rachetVideo,
+      type: "video/webm",
+    },
   },
   {
     id: "5",
@@ -84,6 +108,11 @@ export const userGames = [
     logo: codLogo,
     tagline:
       "The iconic Black Ops series is back with Call of Duty: Black Ops Cold War.",
+    // videoSrc: codVideo,
+    video: {
+      videoSrc: codVideo,
+      type: "video/webm",
+    },
   },
   {
     id: "6",
@@ -92,6 +121,11 @@ export const userGames = [
     mainImg: mambaLarge,
     logo: nbaLogo,
     tagline: "Everything is Game.",
+    // videoSrc: mambaVideo,
+    video: {
+      videoSrc: mambaVideo,
+      type: "video/webm",
+    },
   },
 ];
 

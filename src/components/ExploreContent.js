@@ -2,6 +2,7 @@ import {
   Box,
   Flex,
   HStack,
+  Image,
   StylesProvider,
   Text,
   VStack,
@@ -13,6 +14,7 @@ import styles from "./Home.module.css";
 import logon from "../assets/sounds/logon.mp3";
 import navigate from "../assets/sounds/navigate.mp3";
 import { motion } from "framer-motion";
+import exploreLarge from "../assets/images/astro/astro-bg-duo.png";
 
 export const ExploreContent = () => {
   const [isDown, setIsDown] = useState(false);
@@ -59,61 +61,64 @@ export const ExploreContent = () => {
   }, []);
 
   const MotionFlex = motion.custom(Flex),
-    MotionStack = motion.custom(VStack);
+    MotionStack = motion.custom(VStack),
+    MotionBox = motion.custom(Box);
 
   return (
-    <Box
-      color='white'
-      d='flex'
-      flexDirection='column'
-      justifyContent='center'
-      alignItems='start'
-    >
-      <MotionStack
-        spacing='4'
-        alignSelf='start'
-        align='start'
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 2.2 }}
+    <>
+      <Box
+        color='white'
+        d='flex'
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='start'
       >
-        <Text fontWeight='300' fontSize='xl'>
-          Official News from PlayStation | 10/11/2020
-        </Text>
-        <Text fontWeight='500' fontSize='4xl'>
-          Ready for a PS5 Adventure?
-        </Text>
-        <Text fontWeight='300' fontSize='2xl'>
-          ASTRO's PLAYROOM is pre-loaded and waiting for you!<br></br>Explore
-          the new capabilities of PS5 and feel the worl...
-        </Text>
-        <MotionFlex
-          overflow='auto'
-          w='1200px'
-          onMouseDown={(e) => handleMouseDown(e)}
-          onMouseLeave={(e) => handleMouseLeave(e)}
-          onMouseMove={(e) => handleMouseMove(e)}
-          onMouseUp={(e) => handleMouseUp(e)}
-          ref={dragger}
-          className={isActive ? styles.Active : styles.Dragger}
-          userSelect='none'
+        <MotionStack
+          spacing='4'
+          alignSelf='start'
+          align='start'
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 1.2 }}
         >
-          {exploreItems.map((item, i) => (
-            <Box
-              ml={i > 0 ? "6" : "0"}
-              key={item.id}
-              mt='8'
-              onMouseEnter={playAudioEffect}
-              _hover={{
-                border: "2px solid #eee",
-                transform: "scale(1.1)",
-              }}
-            >
-              <ExploreCard title={item.title} image={item.mainImg} />
-            </Box>
-          ))}
-        </MotionFlex>
-      </MotionStack>
-    </Box>
+          <Text fontWeight='300' fontSize='xl'>
+            Official News from PlayStation | 10/11/2020
+          </Text>
+          <Text fontWeight='500' fontSize='4xl'>
+            Ready for a PS5 Adventure?
+          </Text>
+          <Text fontWeight='300' fontSize='2xl'>
+            ASTRO's PLAYROOM is pre-loaded and waiting for you!<br></br>Explore
+            the new capabilities of PS5 and feel the worl...
+          </Text>
+          <MotionFlex
+            overflow='auto'
+            w='1200px'
+            onMouseDown={(e) => handleMouseDown(e)}
+            onMouseLeave={(e) => handleMouseLeave(e)}
+            onMouseMove={(e) => handleMouseMove(e)}
+            onMouseUp={(e) => handleMouseUp(e)}
+            ref={dragger}
+            className={isActive ? styles.Active : styles.Dragger}
+            userSelect='none'
+          >
+            {exploreItems.map((item, i) => (
+              <Box
+                ml={i > 0 ? "6" : "0"}
+                key={item.id}
+                mt='8'
+                onMouseEnter={playAudioEffect}
+                _hover={{
+                  border: "2px solid #eee",
+                  transform: "scale(1.1)",
+                }}
+              >
+                <ExploreCard title={item.title} image={item.mainImg} />
+              </Box>
+            ))}
+          </MotionFlex>
+        </MotionStack>
+      </Box>
+    </>
   );
 };
